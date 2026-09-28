@@ -13,3 +13,19 @@ renatogroffe/dotnet10-worker-azurequeuestorage-consumer:1
 ```
 
 ## Testes
+
+Aplicação antes de escalar:
+
+![Antes de escalar](img/keda-01.png)
+
+Aplicação escalando:
+
+![Aplicação escalando](img/keda-02.png)
+
+Aplicação no momento em que atingiu o limite de escalabilidade:
+
+![Aplicação escalando até o limite](img/keda-03.png)
+
+Logs produzidos por um dos pods quando a aplicação escalou:
+
+![Logs de um Pod](img/keda-04.png)
