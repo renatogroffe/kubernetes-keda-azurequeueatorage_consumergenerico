@@ -1,0 +1,21 @@
+# Informações sobre uso do Azure Queue Storage com KEDA
+# https://keda.sh/docs/2.21/scalers/azure-storage-queue/
+apiVersion: keda.sh/v1alpha1
+kind: ScaledObject
+metadata:
+  name: workertestsqueue-scaledobject
+spec:
+  scaleTargetRef:
+    name: workertestsqueue
+  pollingInterval: 5
+  cooldownPeriod: 120
+  minReplicaCount: 0
+  maxReplicaCount: 12
+  triggers:
+  - type: azure-queue
+    metadata:
+      queueName: queue-teste
+      queueLength: '5'
+      activationQueueLength: '1'
+      connectionFromEnv: ConnectionStrings__AzureQueueStorage
+      accountName: STORAGE_ACCOUNT_NAME

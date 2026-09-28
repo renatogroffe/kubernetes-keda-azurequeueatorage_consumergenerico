@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: workertestsqueue
+spec:
+  selector:
+    matchLabels:
+      app: workertestsqueue
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: workertestsqueue
+    spec:
+      containers:
+        - name: workertestsqueue
+          image: renatogroffe/dotnet10-worker-azurequeuestorage-consumer:1
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "128Mi"
+            limits:
+              cpu: "500m"
+              memory: "256Mi"
+          env:
+          - name: AzureQueueStorage__Queue
+            value: "queue-teste"
+          - name: WaitingInMilisseconds
+            value: "1000"
+          - name: ConnectionStrings__AzureQueueStorage
+            value: "CONNECTION_STRING_AZURE_STORAGE"
